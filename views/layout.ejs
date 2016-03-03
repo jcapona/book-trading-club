@@ -76,7 +76,7 @@
         <h4>Already have an account?</h4>
         <button type="button" class="btn btn-default btn-lg btn-block" id="login-btn">Login! <span class="caret"></span></button>
         <div class=" hidden" id="login-form">
-          <form role="form" action="/login" method="post">
+          <form id="form-login" role="form" action="/login" method="post">
             <div class="form-group">
               <label for="form-input-username">Username</label>
               <input type="username" name="username" class="form-control" id="form-input-username" placeholder="">
@@ -91,7 +91,7 @@
         <h4>New to the site?</h4>
         <button type="button" class="btn btn-default btn-lg btn-block" id="register-btn">Register <span class="caret"></span></button>
         <div class="hidden" id="reg-form">
-          <form role="form" action="/user" method="post">
+          <form id="form-register" role="form" action="/user" method="post">
             <div class="form-group">
               <label for="form-input-username">Username</label>
               <input type="username" name="username" class="form-control" id="form-input-username" placeholder="">
@@ -161,46 +161,17 @@
       $("#login-form").addClass("hidden");
       $("#reg-form").removeClass("hidden");
       $("#reg-form").addClass("show");
-  });
-  
-  $("#login-btn").on("click",function(){
-      $("#login-btn").addClass("active");
-      $("#register-btn").removeClass("active");
-      $("#reg-form").addClass("hidden");
-      $("#login-form").removeClass("hidden");
-      $("#login-form").addClass("show");
-  });
-
-  function createCookie(name,value,days) {
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime()+(days*24*60*60*1000));
-      var expires = "; expires="+date.toGMTString();
-    }
-    else var expires = "";
-    document.cookie = name+"="+value+expires+"; path=/";
-  }
-  function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-      var c = ca[i];
-      while (c.charAt(0)==' ') c = c.substring(1,c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-  }
-  function eraseCookie(name) {
-    createCookie(name,"",-1);
-  }
-
-  <% if(req.user !== undefined) { %>
-  createCookie('user',true,1)
-  <% } else { %>
-  createCookie('user',false,1)
-  <% } %>
-  
+    });
+    
+    $("#login-btn").on("click",function(){
+        $("#login-btn").addClass("active");
+        $("#register-btn").removeClass("active");
+        $("#reg-form").addClass("hidden");
+        $("#login-form").removeClass("hidden");
+        $("#login-form").addClass("show");
+    });
   </script>
+  <script src="/js/login.js"></script>
   <script src="/js/dependencies/sails.io.js"></script>
 </body>
 </html>
