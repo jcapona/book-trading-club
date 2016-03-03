@@ -27,5 +27,9 @@ module.exports.routes = {
   },
   'post /login': 'AuthController.login',
   '/logout': 'AuthController.logout',
-
+  // Book routes:
+  'post /book': 'BookController.createBook',
+  'get /book/:id': 'BookController.getBook',
+  'get /book/': 'BookController.getAllBooks',
+  'delete /book': 'BookController.deleteBook',
 };
