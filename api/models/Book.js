@@ -9,7 +9,7 @@ module.exports = {
     attributes: {
         title: {
             type: 'string',
-            minLength: 6,
+            minLength: 1,
             required: true,
         },
         author: {

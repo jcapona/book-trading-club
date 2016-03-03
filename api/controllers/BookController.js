@@ -22,11 +22,19 @@ module.exports = {
 		});
 	},
 	createBook: function(req,res){
+    if(req.user == undefined)
+      return res.send({err: "Not logged in"});
+
 		Book.create(req.params.all()).exec(function(err,book){
 			if (err)
         return res.negotiate(err);
 
-			return res.send({ book: book});
+      Prop.create({user_id: req.user.id, book_id: book.id}).exec(function(err,prop){
+        if (err)
+          return res.negotiate(err);
+
+        return res.send({book: book, prop: prop});
+      })
 		});
 	},
 	deleteBook: function(req,res){

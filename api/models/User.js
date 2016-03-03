@@ -29,6 +29,10 @@ module.exports = {
             type: 'string',
             required: true
         },
+        avatar: {
+            type: 'string',
+            defaultsTo: 'http://www.iitedu.org.in/img/unknown_user.png'
+        },
         toJSON: function() {
             var obj = this.toObject();
             delete obj.password;

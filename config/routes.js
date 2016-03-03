@@ -22,9 +22,7 @@
 
 module.exports.routes = {
 
-  '/': {
-    view: 'index'
-  },
+  '/': {view: 'index'},
   'post /login': 'AuthController.login',
   '/logout': 'AuthController.logout',
   // Book routes:
@@ -32,4 +30,6 @@ module.exports.routes = {
   'get /book/:id': 'BookController.getBook',
   'get /book/': 'BookController.getAllBooks',
   'delete /book': 'BookController.deleteBook',
+
+  '/dashboard': 'UserController.dashboard',
 };

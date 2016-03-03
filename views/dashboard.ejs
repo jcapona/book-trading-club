@@ -1,0 +1,86 @@
+<!-- dashboard.ejs -->
+<div class="container">
+  <div class="page-header">
+    <h1>Dashboard <small>Manage your library!</small></h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Profile Information</h3>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="#" class="thumbnail"><img src="<%=req.user.avatar%>" class="img-responsive"></a>
+        </div>
+        <div class="col-md-9">
+          <h1><%=req.user.username%></h1>
+          <p>E-Mail: <%=req.user.email%></p>
+          <p>Member since: <%=req.user.createdAt %></p>
+          <a class="btn btn-default" href="#" role="button" id="deleteAccount">Remove account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">My Books</h3>
+    </div>
+
+    <%if(books !== undefined) { %>
+    <div class="panel-body">
+      <div id="new-poll">
+          <table class="table table-hover">
+            <tr>
+              <td>Title</td>
+              <td>Author</td>
+              <td>Actions</td>
+            </tr>
+          <% for(var i=0; i < books.length; i++) { %>
+            <tr>
+              <td><%= books[i].title %></td>
+              <td><%= books[i].author %></td>
+              <td><i class="fa fa-times"></i></td>
+            </tr>
+          <% } %>
+          </table>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+
+  <div class="panel panel-default">
+  
+    <div class="panel-heading">
+      <h3 class="panel-title">New Book</h3>
+    </div>
+
+    <div class="panel-body">
+      <div id="new-poll">
+        <form action="/book" method="post">
+          <div class="form-group">
+              <label>Title:</label>
+              <input type="text" name="title" placeholder="Title of the book" class="form-control">
+          </div>
+          <div class="form-group">
+              <label>Author:</label>
+              <input type="text" name="author" placeholder="Author of the book" class="form-control">
+          </div>
+          <div class="form-group">
+              <label>ISBN:</label>
+              <input type="text" name="isbn" placeholder="ISBN of the book" class="form-control">
+          </div>
+          <div class="form-group">
+              <input type="submit" value="Create" class="form-control">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
