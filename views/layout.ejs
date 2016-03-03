@@ -1,91 +1,208 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BookTrader: manage your book library online">
+  <meta name="author" content="Jorge Capona">
 
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  
+  <link rel="stylesheet" type="text/css" href="linker/styles/main_style.css">
 
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
 
-    <!--
-        Stylesheets and Preprocessors
-        ==============================
+  <title>BookTader | Manage your library online</title>  
+</head>
 
-        You can always bring in CSS files manually with `<link>` tags, or asynchronously
-        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
-        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+<body>
 
-        By default, stylesheets from your `assets/styles` folder are included
-        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
-        are supported. In production, your styles will be minified and concatenated into
-        a single file.
+  <nav id="nav" class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+      </div>
 
-        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            + Change the order of your CSS files
-            + Import stylesheets from other directories
-            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-    -->
+        <ul class="nav navbar-nav navbar-right">
+          <a id="logo" class="navbar-brand" href="/index">book trader</a>
+  <% if(req.user !== undefined) { %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi <%=req.user.name%>!<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <!--
+              <li><a href="/dashboard"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+              <li role="separator" class="divider"></li>
+              -->
+              <li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+  <% } else { %>
+          <li>
+            <!-- Button trigger modal -->
+            <a href="#" type="button" class="" data-toggle="modal" data-target="#myModal">
+              <p>Log In</p>
+            </a>
+          </li>
+        </ul>
+  <% } %>
 
-    <!--STYLES-->
-    <!--STYLES END-->
-  </head>
+      </div>
+    </div>
+  </nav>
 
-  <body>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Access or create an account</h4>
+      </div>
+      <div class="modal-body">
+      
+        <h4>Already have an account?</h4>
+        <button type="button" class="btn btn-default btn-lg btn-block" id="login-btn">Login! <span class="caret"></span></button>
+        <div class=" hidden" id="login-form">
+          <form role="form" action="/login" method="post">
+            <div class="form-group">
+              <label for="form-input-username">Username</label>
+              <input type="username" name="username" class="form-control" id="form-input-username" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="form-input-password">Password</label>
+              <input type="password" name="password" class="form-control" id="form-input-password" placeholder="">
+            </div>
+            <button class="btn btn-default" type="submit">Log in</button>
+          </form>
+        </div>
+        <h4>New to the site?</h4>
+        <button type="button" class="btn btn-default btn-lg btn-block" id="register-btn">Register <span class="caret"></span></button>
+        <div class="hidden" id="reg-form">
+          <form role="form" action="/user" method="post">
+            <div class="form-group">
+              <label for="form-input-username">Username</label>
+              <input type="username" name="username" class="form-control" id="form-input-username" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="form-input-name">Name</label>
+              <input type="name" name="name" class="form-control" id="form-input-name" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="form-input-email">E-mail</label>
+              <input type="email" name="email" class="form-control" id="form-input-email" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="form-input-password">Password</label>
+              <input type="password" name="password" class="form-control" id="form-input-password" placeholder="">
+            </div>
+            <button class="btn btn-default" type="submit">Register</button>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container">
+
+    <% if (req.session.flash) { %>
+    <div class = "container">
+      <% if (req.session.flash.error) { %>
+      <div data-alert class="alert alert-danger alert-dismissible" role="alert">
+        <i class="fa fa-exclamation-circle"></i>
+        <%= req.flash('error') %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <% } %>
+
+      <% if (req.session.flash.success) { %>
+      <div data-alert class="alert alert-success alert-dismissible" role="alert">
+        <i class="fa fa-check-circle-o"></i>
+        <%= req.flash('success') %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <% } %>
+
+      <% if (req.session.flash.notice) { %>
+      <div data-alert class="alert alert-info alert-dismissible" role="alert">
+        <i class="fa fa-exclamation"></i>
+        <%= req.flash('notice ') %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <% } %>
+    </div> 
+    <% } %>
+  </div>
+
     <%- body %>
+  
 
+  <script type="text/javascript">
+    $("#register-btn").on("click",function(){
+      $("#register-btn").addClass("active");
+      $("#login-btn").removeClass("active");
+      $("#login-form").addClass("hidden");
+      $("#reg-form").removeClass("hidden");
+      $("#reg-form").addClass("show");
+  });
+  
+  $("#login-btn").on("click",function(){
+      $("#login-btn").addClass("active");
+      $("#register-btn").removeClass("active");
+      $("#reg-form").addClass("hidden");
+      $("#login-form").removeClass("hidden");
+      $("#login-form").addClass("show");
+  });
 
+  function createCookie(name,value,days) {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime()+(days*24*60*60*1000));
+      var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+  }
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+  function eraseCookie(name) {
+    createCookie(name,"",-1);
+  }
 
-    <!--
-        Client-side Templates
-        ========================
-
-        HTML templates are important prerequisites of modern, rich client applications.
-        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
-        that you load these templates client-side.
-
-        By default, your Gruntfile is configured to automatically load and precompile
-        client-side JST templates in your `assets/templates` folder, then
-        include them here automatically (between TEMPLATES and TEMPLATES END).
-
-        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Import templates from other directories
-            + Use a different template engine (handlebars, jade, dust, etc.)
-            + Internationalize your client-side templates using a server-side
-              stringfile before they're served.
-    -->
-
-    <!--TEMPLATES-->
-    <!--TEMPLATES END-->
-
-
-    <!--
-
-      Client-side Javascript
-      ========================
-
-      You can always bring in JS files manually with `script` tags, or asynchronously
-      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
-      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-      By default, files in your `assets/js` folder are included here
-      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
-      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
-      and concatenated into a single file.
-
-      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-      For example, here are a few things you could do:
-
-          + Change the order of your scripts
-          + Import scripts from other directories
-          + Use a different preprocessor, like TypeScript
-
-    -->
-
-    <!--SCRIPTS-->
-    <!--SCRIPTS END-->
-  </body>
+  <% if(req.user !== undefined) { %>
+  createCookie('user',true,1)
+  <% } else { %>
+  createCookie('user',false,1)
+  <% } %>
+  
+  </script>
+  <script src="/js/dependencies/sails.io.js"></script>
+</body>
 </html>
