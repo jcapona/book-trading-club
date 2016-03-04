@@ -23,12 +23,14 @@
 module.exports.routes = {
 
   '/': {view: 'index'},
+  '/all': {view: 'all'},
   'post /login': 'AuthController.login',
   '/logout': 'AuthController.logout',
   // Book routes:
   'post /book': 'BookController.createBook',
-  'get /book/:id': 'BookController.getBook',
   'get /book/': 'BookController.getAllBooks',
+  'get /book/search': 'BookController.searchBooks',
+  'get /book/:id': 'BookController.getBook',
   'delete /book': 'BookController.deleteBook',
   'post /isbn': 'BookController.createFromIsbn',
   'get /isbn/:id': 'BookController.getIsbn',
