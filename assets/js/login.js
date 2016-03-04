@@ -37,3 +37,19 @@ $("#form-register").on("submit",function(e){
     }
   });
 });
+
+$("#register-btn").on("click",function(){
+  $("#register-btn").addClass("active");
+  $("#login-btn").removeClass("active");
+  $("#login-form").addClass("hidden");
+  $("#reg-form").removeClass("hidden");
+  $("#reg-form").addClass("show");
+});
+
+$("#login-btn").on("click",function(){
+  $("#login-btn").addClass("active");
+  $("#register-btn").removeClass("active");
+  $("#reg-form").addClass("hidden");
+  $("#login-form").removeClass("hidden");
+  $("#login-form").addClass("show");
+});
