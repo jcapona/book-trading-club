@@ -1,15 +1,16 @@
-
-#header {
-	background: url('/images/header_back.jpg') no-repeat center center fixed;
-  	background-size: cover;;
-	min-height: 50vh;
-	padding-top: 40px;
+p, li {
+	font-family: 'Roboto', sans-serif;
 }
 
-#feats {
-	padding: 70px 0 0 0;
+h1, h2, h3, h4 {
+	color: #00A8E8;
+	font-family: 'Roboto', sans-serif;
 }
 
+.logo {
+	font-family: 'Lilita One', cursive;
+	color: #00A8E8;
+}
 
 #nav {
 	margin: 0;
@@ -17,6 +18,13 @@
 
 #nav a, #nav li {
 	color: #00A8E8;
+}
+
+#header {
+	background: url('/images/header_back.jpg') no-repeat center center fixed;
+  	background-size: cover;
+	padding-top: 40px;
+	padding-bottom: 80px;
 }
 
 #header h1 {
@@ -29,20 +37,14 @@
 	margin: 0;
 }
 
-.logo {
-	font-family: 'Lilita One', cursive;
-	color: #00A8E8;
-}
-
-p, li {
-	font-family: 'Roboto', sans-serif;
-}
-
-h1, h2, h3, h4 {
-	color: #00A8E8;
-	font-family: 'Roboto', sans-serif;
-}
-
-#book-search {
+#form-search {
 	margin: 40px 0 40px 0;
+}
+
+#feats {
+	padding: 70px 0 0 0;
+}
+
+#results {
+	padding: 40px 0 40px 0;
 }
