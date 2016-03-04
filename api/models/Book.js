@@ -13,7 +13,7 @@ module.exports = {
             required: true,
         },
         author: {
-            type: 'string',
+            type: 'array',
             required: true,
         },
         isbn: {
@@ -21,6 +21,22 @@ module.exports = {
             minLength: 6,
             required: true,
             unique: true
+        },
+        description: {
+            type: 'string',
+        },
+        img: {
+            type: 'string',
+            defaultsTo: 'http://imageses.com/images/no_foto.jpg'
+        },
+        link: {
+            type: 'string',
+        },
+        isbn10: {
+            type: 'string',
+        },
+        isbn13: {
+            type: 'string',
         },
         toJSON: function() {
             return this.toObject();
