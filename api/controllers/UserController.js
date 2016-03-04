@@ -14,6 +14,9 @@ module.exports = {
       if(err)
         return res.negotiate(err);
 
+      if(books.length == 0)
+        return res.view('dashboard',{books:[]});
+
       //console.log(JSON.stringify(books,null,2));
       var book_obj = [];
       books.forEach(function(m_book,index){
