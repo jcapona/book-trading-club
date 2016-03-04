@@ -1,38 +1,45 @@
 <!-- index.ejs -->
 <div id="header">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-center">book trader!</h1>
-      <p class="text-center">are you looking for a book?</p>
-    </div>
-  </div>
-</div>
-
-<div id="search-bar">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <h1 class="logo text-center">book trader</h1>
+        <p class="text-center">the home for your books! manage your library online, search through other users libraries, trade the book you want to read</p>
+      </div>
+      <div class="col-md-12">
         <div class="input-group">
-          <!--
-          <span class="input-group-addon input-lg" style="background-color: white; border-width: 0px;">
-            <i class="fa fa-map-marker fa-1x"></i>
-          </span>
-          -->
-          <input id="search" type="text" name="location" class="form-control input-lg" placeholder="Which book do you want?">
-          
+          <input id="book-search" type="text" name="query" class="form-control input-lg" placeholder="Enter a book or author">
           <span class="input-group-btn">
-            <button id="search-btn" class="btn btn-default input-lg" type="button">Go!</button>
+            <button id="search-btn" class="btn btn-default input-lg" type="button">Search</button>
           </span>
 
         </div>
       </div>
-  </div>
 
-  <div>
-    <span  id="search-results"></span>
-  </div>
-
+    </div>
   </div>
 </div>
 
-<script src="/js/index.js"></script>
+<div>
+  <span  id="search-results"></span>
+</div>
+
+<div id="feats" class="container">
+  <div class="container">
+    <div class="col-md-4 text-center">
+      <img class="img-responsive center-block" src="/images/feat-lib.png" style="width: 100px;">
+      <h3>Put your books online!</h3>
+      <p>Manage your books from the dashboard</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img class="img-responsive center-block" src="/images/feat-trade.png" style="width: 100px;">
+      <h3>Find the book you always wanted!</h3>
+      <p>Buy or trade for one of your own</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img class="img-responsive center-block" src="/images/feat-talk.png" style="width: 100px;">
+      <h3>Interact</h3>
+      <p>Talk with other book lovers from around the world</p>
+    </div>
+  </div>
+</div>
