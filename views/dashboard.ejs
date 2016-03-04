@@ -32,10 +32,10 @@
 
     <%if(books != undefined) { %>
     <div class="panel-body">
-      <div id="new-poll">
+      <div id="new-book">
           <table class="table table-hover">
             <tr>
-              <td>Cover</td>
+              <td></td>
               <td>Title</td>
               <td>Author</td>
               <td>Actions</td>
@@ -43,8 +43,8 @@
           <% for(var i=0; i < books.length; i++) { %>
             <tr>
               <td><img src="<%= books[i].img%>" class="img-responsive" style="max-height:100px;"></td>
-              <td><%= books[i].title %></td>
-              <td><%= books[i].author %></td>
+              <td><p><%= books[i].title %></p></td>
+              <td><p><%= books[i].author %></p></td>
               <td><button value="<%= books[i].id %>" type="button" class="btn btn-default delete"><i class="fa fa-times"></i></button></td>
             </tr>
           <% } %>
@@ -52,60 +52,13 @@
       </div>
     </div>
     <% } %>
-  </div>
-
-  <div class="panel panel-default">
-  
-    <div class="panel-heading">
-      <h3 class="panel-title">New Book</h3>
-    </div>
-
-    <div class="panel-body">
-      <div id="new-book">
-        <form action="/book" method="post">
-          <div class="form-group">
-              <label>Title:</label>
-              <input type="text" name="title" placeholder="Title of the book" class="form-control">
-          </div>
-          <div class="form-group">
-              <label>Author:</label>
-              <input type="text" name="author" placeholder="Author of the book" class="form-control">
-          </div>
-          <div class="form-group">
-              <label>ISBN:</label>
-              <input type="text" name="isbn" placeholder="ISBN of the book" class="form-control">
-          </div>
-          <div class="form-group">
-              <input type="submit" value="Create" class="form-control">
-          </div>
-        </form>
-      </div>
+    <div class="panel-footer text-center">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-book">
+      <i class="fa fa-plus"></i> Add a book
+      </button>
     </div>
 
   </div>
-
-  <div class="panel panel-default">
-  
-    <div class="panel-heading">
-      <h3 class="panel-title">New Book from ISBN</h3>
-    </div>
-
-    <div class="panel-body">
-      <div id="new-book">
-        <form id="form-isbn" action="/isbn" method="post">
-          <div class="form-group">
-              <label>ISBN:</label>
-              <input type="text" name="isbn" placeholder="ISBN of the book" class="form-control">
-          </div>
-          <button id="form-isbn-btn" class="btn btn-default" type="submit">Search</button>
-        </form>
-        <span id="form-isbn-error"></span>
-      </div>
-    </div>
-
-  </div>
-
-
 
 </div>
 
