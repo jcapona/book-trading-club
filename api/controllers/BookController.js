@@ -10,17 +10,37 @@ module.exports = {
 	    Book.find({}).exec(function(err, books){
 	      if (err)
 	        return res.negotiate(err);
+
 	      return res.send({books: books});
 	    });
 	},
 	getBook: function(req,res){
-		Book.findOne({id: req.params.id}).exec(function(err, book){
+    Book.findOne({id: req.params.id}).exec(function(err, book){
 			if (err)
         return res.negotiate(err);
 
-		  return res.send({ book: book});
+		  return res.send({book: book});
 		});
 	},
+  searchBooks: function(req,res){
+    var results = {};
+    Book.find({title: {"contains": req.params.all().query}}).exec(function(err, booksTitle){
+      if(err){
+        console.log(err);
+        return res.negotiate(err);
+      }
+      
+      results.byTitle = booksTitle;
+      Book.find({author: {"contains": req.params.all().query}}).exec(function(err, booksAuth){
+        if(err)
+          return res.negotiate(err);
+
+        results.byAuthor = booksAuth;
+        return res.send({books: results});
+      });
+    });
+
+  },
 	createBook: function(req,res){
     if(req.user == undefined){
       res.status(500);
@@ -52,7 +72,7 @@ module.exports = {
         return res.send({err: err.toString()});
       }
       console.log(JSON.stringify(data,null,2));
-      
+
       Book.create({
         title: data['title'],
         author: data['authors'],
