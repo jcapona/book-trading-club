@@ -42,7 +42,7 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          
+          <li><a href="all">All books!</a></li>
   <% if(req.user !== undefined) { %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi <%=req.user.name%>!<span class="caret"></span></a>
@@ -240,24 +240,8 @@
 <% } %>
 
 
-  <script type="text/javascript">
-    $("#register-btn").on("click",function(){
-      $("#register-btn").addClass("active");
-      $("#login-btn").removeClass("active");
-      $("#login-form").addClass("hidden");
-      $("#reg-form").removeClass("hidden");
-      $("#reg-form").addClass("show");
-    });
-    
-    $("#login-btn").on("click",function(){
-        $("#login-btn").addClass("active");
-        $("#register-btn").removeClass("active");
-        $("#reg-form").addClass("hidden");
-        $("#login-form").removeClass("hidden");
-        $("#login-form").addClass("show");
-    });
-  </script>
   <script src="/js/login.js"></script>
+  <script src="/js/display-books.js"></script>
   <script src="/js/dependencies/sails.io.js"></script>
 </body>
 </html>

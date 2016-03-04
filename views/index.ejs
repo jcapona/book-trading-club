@@ -7,21 +7,19 @@
         <p class="text-center">the home for your books! manage your library online, search through other users libraries, trade the book you want to read</p>
       </div>
       <div class="col-md-12">
-        <div class="input-group">
-          <input id="book-search" type="text" name="query" class="form-control input-lg" placeholder="Enter a book or author">
-          <span class="input-group-btn">
-            <button id="search-btn" class="btn btn-default input-lg" type="button">Search</button>
-          </span>
-
+        <form  id="form-search" action="/search" method="get">
+          <div class="input-group">
+            <input type="text" name="query" class="form-control input-lg" placeholder="Enter a book or author">
+            <span class="input-group-btn">
+              <button id="search-btn" class="btn btn-default input-lg" type="submit">Search</button>
+            </span>
+          </div>
+        </form>
         </div>
       </div>
 
     </div>
   </div>
-</div>
-
-<div>
-  <span  id="search-results"></span>
 </div>
 
 <div id="feats" class="container">
@@ -42,4 +40,8 @@
       <p>Talk with other book lovers from around the world</p>
     </div>
   </div>
+</div>
+
+<div class="container">
+  <span id="results"></span>
 </div>
