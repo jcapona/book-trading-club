@@ -30,6 +30,8 @@ module.exports.routes = {
   'get /book/:id': 'BookController.getBook',
   'get /book/': 'BookController.getAllBooks',
   'delete /book': 'BookController.deleteBook',
+  'post /isbn': 'BookController.createFromIsbn',
+  'get /isbn/:id': 'BookController.getIsbn',
 
   '/dashboard': 'UserController.dashboard',
 };

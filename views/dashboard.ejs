@@ -1,5 +1,6 @@
 <!-- dashboard.ejs -->
 <div class="container">
+
   <div class="page-header">
     <h1>Dashboard <small>Manage your library!</small></h1>
   </div>
@@ -29,20 +30,22 @@
       <h3 class="panel-title">My Books</h3>
     </div>
 
-    <%if(books !== undefined) { %>
+    <%if(books != undefined) { %>
     <div class="panel-body">
       <div id="new-poll">
           <table class="table table-hover">
             <tr>
+              <td>Cover</td>
               <td>Title</td>
               <td>Author</td>
               <td>Actions</td>
             </tr>
           <% for(var i=0; i < books.length; i++) { %>
             <tr>
+              <td><img src="<%= books[i].img%>" class="img-responsive" style="max-height:100px;"></td>
               <td><%= books[i].title %></td>
               <td><%= books[i].author %></td>
-              <td><i class="fa fa-times"></i></td>
+              <td><button value="<%= books[i].id %>" type="button" class="btn btn-default delete"><i class="fa fa-times"></i></button></td>
             </tr>
           <% } %>
           </table>
@@ -51,7 +54,6 @@
     <% } %>
   </div>
 
-
   <div class="panel panel-default">
   
     <div class="panel-heading">
@@ -59,7 +61,7 @@
     </div>
 
     <div class="panel-body">
-      <div id="new-poll">
+      <div id="new-book">
         <form action="/book" method="post">
           <div class="form-group">
               <label>Title:</label>
@@ -82,5 +84,29 @@
 
   </div>
 
+  <div class="panel panel-default">
+  
+    <div class="panel-heading">
+      <h3 class="panel-title">New Book from ISBN</h3>
+    </div>
+
+    <div class="panel-body">
+      <div id="new-book">
+        <form id="form-isbn" action="/isbn" method="post">
+          <div class="form-group">
+              <label>ISBN:</label>
+              <input type="text" name="isbn" placeholder="ISBN of the book" class="form-control">
+          </div>
+          <button id="form-isbn-btn" class="btn btn-default" type="submit">Search</button>
+        </form>
+        <span id="form-isbn-error"></span>
+      </div>
+    </div>
+
+  </div>
+
+
 
 </div>
+
+<script src="/js/dashboard.js"></script>
