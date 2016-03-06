@@ -29,6 +29,12 @@ module.exports = {
             type: 'string',
             required: true
         },
+        city: {
+            type: 'string',
+        },
+        state: {
+            type: 'string',
+        },
         avatar: {
             type: 'string',
             defaultsTo: 'http://www.iitedu.org.in/img/unknown_user.png'
