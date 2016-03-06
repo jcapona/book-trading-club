@@ -6,40 +6,35 @@
  */
 
 module.exports = {
-	getAllBooks: function(req,res){
-	    Book.find({}).exec(function(err, books){
-	      if (err)
-	        return res.negotiate(err);
-
-	      return res.send({books: books});
-	    });
-	},
 	getBook: function(req,res){
     Book.findOne({id: req.params.id}).exec(function(err, book){
 			if (err)
         return res.negotiate(err);
 
-		  return res.send({book: book});
+		  return res.json({book: book});
 		});
 	},
+  getAllBooks: function(req,res){
+    Book.find({}).exec(function(err, books){
+      if (err)
+        return res.negotiate(err);
+
+      return res.json(books);
+    });
+  },
   searchBooks: function(req,res){
-    var results = {};
-    Book.find({title: {"contains": req.params.all().query}}).exec(function(err, booksTitle){
+    Book.find({
+      or: [
+        {title: {"contains": req.params.all().query}},
+        {author: {"contains": req.params.all().query}}
+        ]
+    }).exec(function(err, books){
       if(err){
         console.log(err);
         return res.negotiate(err);
       }
-      
-      results.byTitle = booksTitle;
-      Book.find({author: {"contains": req.params.all().query}}).exec(function(err, booksAuth){
-        if(err)
-          return res.negotiate(err);
-
-        results.byAuthor = booksAuth;
-        return res.send({books: results});
-      });
+      return res.json(books);
     });
-
   },
 	createBook: function(req,res){
     if(req.user == undefined){
