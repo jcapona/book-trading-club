@@ -31,9 +31,15 @@ module.exports = {
         },
         city: {
             type: 'string',
+            defaultsTo: '-'
         },
         state: {
             type: 'string',
+            defaultsTo: '-'
+        },
+        country: {
+            type: 'string',
+            defaultsTo: '-'
         },
         avatar: {
             type: 'string',

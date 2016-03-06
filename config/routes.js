@@ -35,5 +35,6 @@ module.exports.routes = {
   'post /isbn': 'BookController.createFromIsbn',
   'get /isbn/:id': 'BookController.getIsbn',
 
+  'put /user': 'UserController.update',
   '/dashboard': 'UserController.dashboard',
 };

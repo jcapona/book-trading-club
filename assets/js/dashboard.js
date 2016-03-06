@@ -52,4 +52,24 @@ $("#form-isbn").on('submit', function(e){
     }
   });
 
-})
+});
+
+
+
+$("#form-update").on("submit",function(e){
+  e.preventDefault();
+  console.log("updating");
+  $.ajax({
+    type: "PUT",
+    url: '/user/',
+    data: $("#form-update").serialize(),
+    error: function(jqXHR, textStatus, errorMessage) {
+      console.log(errorMessage);
+    },
+    success: function(data)
+    {
+      console.log(data);
+      //location.reload();
+    }
+  });
+});

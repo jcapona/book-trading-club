@@ -35,5 +35,40 @@ module.exports = {
 
     });
 	},
+  update: function(req,res){
+    if(req.user == undefined)
+      return res.send({err: "Not logged in"});
+
+    User.findOne({id: req.user.id}).exec(function(err, user) {
+      if(err){
+        console.log(err);
+        return res.negotiate(err);
+      }
+
+      if(req.params.all().name) {
+          user.name = req.params.all().name;
+      }
+      if(req.params.all().city) {
+          user.city = req.params.all().city;
+      }
+      if(req.params.all().state) {
+          user.state = req.params.all().state;
+      }
+      if(req.params.all().country) {
+          user.country = req.params.all().country;
+      }
+
+      user.save(function(error) {
+        if(error) {
+          console.log(err);
+          return res.negotiate(err);
+        } 
+        console.log(user);
+        return res.send(user);
+      });
+
+    });
+  },
+
 };
 
