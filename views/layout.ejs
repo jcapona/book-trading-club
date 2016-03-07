@@ -239,9 +239,45 @@
 
 <% } %>
 
+<!-- Interaction modal -->
+<div class="modal fade" id="modal-inter" tabindex="-1" role="dialog" aria-labelledby="interModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="interModalLabel">Message the owner</h4>
+      </div>
+      <div class="modal-body">
+      
+       <form id="form-inter" role="form" action="/user" method="post">
+            <span id="form-inter-span"></span>
+            <div class="form-group">
+              <label>Message</label>
+              <input type="text" name="msg_tx" class="form-control" id="" placeholder="">
+            </div>
 
+            <button class="btn btn-default" type="submit">Send</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript">
+    var usr = {}; 
+    <% if (req.user) { %>
+      usr.id = "<%= req.user.id %>";
+      usr.username = "<%= req.user.username %>";
+    <% } %>
+  </script>
+  <script src="/js/interaction.js"></script>
   <script src="/js/login.js"></script>
   <script src="/js/display-books.js"></script>
   <script src="/js/dependencies/sails.io.js"></script>
+
 </body>
 </html>
