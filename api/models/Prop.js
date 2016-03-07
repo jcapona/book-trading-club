@@ -11,6 +11,9 @@ module.exports = {
   		user_id: {
             type: 'string',
         },
+  		user: {
+            type: 'string',
+        },
         book_id: {
         	type: 'string',
         },
