@@ -33,7 +33,27 @@ module.exports = {
         console.log(err);
         return res.negotiate(err);
       }
-      return res.json(books);
+      if(books.length == 0)
+        return res.status(500).json({err: "Not found"});
+
+      books.forEach(function(book,index){
+
+        Prop.findOne({book_id: book.id}).exec(function(err, prop){
+          if (err)
+            return res.negotiate(err);
+
+          book.owner = {};
+          book.owner.id = prop.user_id;
+          book.owner.name = prop.user;
+
+          if(index + 1 == books.length)
+           return res.json(books);    
+          
+        });
+
+      });
+      
+
     });
   },
 	createBook: function(req,res){
@@ -46,7 +66,7 @@ module.exports = {
 			if (err)
         return res.negotiate(err);
 
-      Prop.create({user_id: req.user.id, book_id: book.id}).exec(function(err,prop){
+      Prop.create({user_id: req.user.id, user: req.user.username, book_id: book.id}).exec(function(err,prop){
         if (err)
           return res.negotiate(err);
 
@@ -112,5 +132,5 @@ module.exports = {
         return res.send({});
       });
 		});
-	}
+	},
 }
