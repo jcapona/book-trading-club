@@ -1,0 +1,120 @@
+<!-- msg.ejs -->
+<div class="container">
+
+  <div class="page-header">
+    <h1>Message Board <small>Manage your interactions with other users</small></h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Messages</h3>
+    </div>
+
+	<%if(msg != undefined) { %>
+    <div class="panel-body">
+      <div id="new-book">
+          <table class="table table-hover">
+            <tr>
+              <td>Book</td>
+              <td>From</td>
+              <td>Message</td>
+              <td>Your response</td>
+            </tr>
+          <% for(var i=0; i < msg.length; i++) { %>
+            <tr>
+              <td><img src='<%= msg[i]['book'].img %>' class="img-responsive" style="height: 100px;"></td>
+              <td><p><%= msg[i]['from'].username %></p></td>
+              <td><p><%= msg[i].msg.tx %></p></td>
+
+              <% if(msg[i].msg.rx.length > 0) { %>
+              	<td><p><%= msg[i].msg.rx %></p></td>
+              <% } else { %>
+              	<td><button type="button" value='<%= msg[i].id %>' class="btn btn-default btn-inter"><i class="fa fa-reply"></i> Reply</button></td>
+            	<% } %>
+
+            </tr>
+          <% } %>
+          </table>
+      </div>
+    </div>
+    <% } %>
+
+
+  </div>
+</div>
+
+
+
+<!-- Interaction modal -->
+<div class="modal fade" id="modal-inter-response" tabindex="-1" role="dialog" aria-labelledby="interModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="interModalLabel">Message the owner</h4>
+      </div>
+      <div class="modal-body">
+      
+       <form id="form-inter-response" role="form">
+            <span id="form-inter-response-span"></span>
+            <div class="form-group">
+              <label>Message</label>
+              <input type="text" name="msg_rx" class="form-control" placeholder="Reply heres">
+            </div>
+            <button class="btn btn-default" type="submit">Send</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+/**
+	Manages modal that creates response to a certain message
+*/
+$(document.body).on('click', '.btn-inter' ,function(e){
+  e.preventDefault();
+  
+  var html = "";
+  html += "<input type='text' name='id' class='hidden' value='"+ $(this).val() +"'>";
+  $("#form-inter-response-span").html('');
+  $("#form-inter-response-span").append(html);
+  
+  $('#modal-inter-response').modal('show');
+});
+
+
+/**
+  Manages form on #modal-inter-response, response to msg received
+*/
+$(document.body).on('submit', '#form-inter-response' ,function(e){
+	e.preventDefault();
+  console.log($("#form-inter-response").serialize());
+  
+  $.ajax({
+    type: "PUT",
+    url: '/interact',
+    data: $("#form-inter-response").serialize(),
+    error: function(jqXHR, textStatus, errorMessage) {
+      console.log(jqXHR);
+    },
+    success: function(data)
+    {
+      console.log(data);
+      //location.reload();
+    }
+  });
+
+});
+
+
+
+</script>
+<script src="/js/dashboard.js"></script>
