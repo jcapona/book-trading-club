@@ -37,4 +37,9 @@ module.exports.routes = {
 
   'put /user': 'UserController.update',
   '/dashboard': 'UserController.dashboard',
+
+  'post /interact': 'InteractController.create',
+  'put /interact': 'InteractController.reply',
+  'get /interact': 'InteractController.get',
+  '/msg': 'InteractController.display',
 };
