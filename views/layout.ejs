@@ -45,10 +45,21 @@
           <li><a href="all">All books!</a></li>
   <% if(req.user !== undefined) { %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi <%=req.user.name%>!<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi <%=req.user.name%>!
+            <% if ((req.user.messages !== undefined)&&(req.user.messages > 0)) { %>
+              <span class="label label-primary"><%=req.user.messages%></span>
+            <% } %>
+            <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li>
                 <a href="/dashboard"><i class="fa fa-gear"></i> Dashboard</a>
+              </li>
+              <li>
+                <a href="/msg"><i class="fa fa-envelope-o"></i> Messages 
+                <% if ((req.user.messages !== undefined)&&(req.user.messages > 0)) { %>
+                  <span class="label label-primary"><%=req.user.messages%></span>
+                <% } %>
+                </a>
               </li>
               <li>
                 <a href="" data-toggle="modal" data-target="#modal-book">
@@ -77,9 +88,9 @@
 
 
   <div class="container">
-
     <% if (req.session.flash) { %>
     <div class = "container">
+      
       <% if (req.session.flash.error) { %>
       <div data-alert class="alert alert-danger alert-dismissible" role="alert">
         <i class="fa fa-exclamation-circle"></i>
