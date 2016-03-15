@@ -23,6 +23,33 @@ module.exports.http = {
 
    middleware: {
 
+    checkMessages: function (req,res,next) { 
+      if(req.user){
+        Message.findOne({user: req.user.id}, function(err, msg){
+          if(err)
+          {
+            console.log(err);
+            next();
+          }
+          else if(!msg)
+          {
+            next();
+          }
+          else if(msg.messages !== undefined)
+          {
+            req.user.messages = msg.messages;
+            next();
+          }
+          else
+          {
+            req.user.messages = 0;
+            next();
+          }
+        });
+      }
+      else
+        next(); 
+    },
     passportInit    : require('passport').initialize(),
     passportSession : require('passport').session(),
     
@@ -35,6 +62,7 @@ module.exports.http = {
        'handleBodyParserError',
        'passportInit',
        'passportSession',
+       'checkMessages',
        'compress',
        'methodOverride',
        'poweredBy',
