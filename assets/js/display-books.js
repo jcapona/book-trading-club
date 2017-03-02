@@ -42,7 +42,7 @@ function displayResults(data) {
   html += "<div class='row'>";
   for (var i = 0; i < data.length; i++) {
     html += "<div class='col-xs-4 col-md-2'>";
-    html += "<a href="+"/book/info?bid="+data[i.toString()]['id']+" class='text-center' target='_blank'>";
+    html += "<a href="+"/book/info?id="+data[i.toString()]['id']+" class='text-center' target='_blank'>";
     html += "<img src="+data[i.toString()]['img']+" class='thumbnail center-block' style='max-height: 200px;'>";
     html += "</a>";
     html += "<h4 class='text-center'>"+data[i.toString()]['title'].slice(0,15);
@@ -61,9 +61,8 @@ function displayResults(data) {
         html += "<button class='btn btn-info btn-sm center-block' disabled>Your book</button>";
       }
     } else {
-      html += "<p>You must login to message the owner</p>";
-      html += '<a href="#" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-login">';
-      html += '<p>Log In</p></a>';
+      html += '<button class="btn btn-success btn-sm center-block" data-toggle="modal" data-target="#modal-login">';
+      html += 'Login to contact</button>';
     }
 
     html += "</div>";
