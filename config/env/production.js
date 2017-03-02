@@ -11,20 +11,7 @@
  */
 
 module.exports = {
-    connections: {
-        mongo_local: {
-            adapter: 'sails-mongo',
-            host: 'ds033143.mlab.com',
-            port: 33143,
-            user: process.env.MONGO_USER,
-            password: process.env.MONGO_PASSWORD,
-            database: 'booktrader'
-        }
-    },
     models: {
-        connection: 'mongolabServer'
-    },
-    log: {
-         level: "silent"
+        connection: 'mlabServer'
     }
 };

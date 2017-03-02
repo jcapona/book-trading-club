@@ -11,21 +11,7 @@
  */
 
 module.exports = {
-
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
-   
-   connections: {
-		mongo_local: {
-		    adapter: 'sails-mongo',
-		    host: 'localhost',
-		    port: 27017,
-		    database: 'booktrader'
-		}
-	},
-   	models: {
-		connection: 'mongo_local'
-  	},
+  models: {
+    connection: 'mongoLocal'
+  },
 };
