@@ -27,7 +27,7 @@ module.exports = {
         },
         img: {
             type: 'string',
-            defaultsTo: 'http://imageses.com/images/no_foto.jpg'
+            defaultsTo: '/images/no-cover.png'
         },
         link: {
             type: 'string',
