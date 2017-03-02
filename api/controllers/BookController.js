@@ -7,7 +7,7 @@
 
 module.exports = {
     getBook: function(req, res) {
-        Book.findOne({id: req.params.id}).exec(function(err, book) {
+        Book.findOne({id: req.params.all().id}).exec(function(err, book) {
 	    if (err)
                 return res.negotiate(err);
             return res.json({book: book});
