@@ -32,7 +32,7 @@ module.exports = {
                 return res.negotiate(err);
               }
             if (books.length == 0)
-            return res.status(500).json({err: "Not found"});
+            return res.status(404).json({err: "Book not found :("});
 
             books.forEach(function(book,index) {
                 Prop.findOne({book_id: book.id}).exec(function(err, prop) {

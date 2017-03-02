@@ -22,6 +22,14 @@ function search(query) {
       $("#feats").addClass("hidden");
       //console.log(data);
       displayResults(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      var message = JSON.parse(jqXHR['responseText'])['err'];
+      var html = "<div class='col-xs-12'><img class='img-responsive center-block' src='/images/sad.png' style='max-width: 50px; margin-top: 20px'></div>";
+      html += "<div class='col-xs-12'><h2 class='text-center'>Sorry! <small>"+ message + "</small></h2></div>";
+      $("#feats").addClass("hidden");
+      $("#results").html('');
+      $("#results").append(html);
     }
   });
 }
