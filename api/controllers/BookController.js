@@ -72,13 +72,20 @@ module.exports = {
             return res.send({err: "Not logged in"});
         }
 
+        var isbn = req.params.all().isbn;
         var node_isbn = require('node-isbn');
-        node_isbn.resolve(req.params.all().isbn, function (err, data) {
+        node_isbn.resolve(isbn, function (err, data) {
             if (err) {
                 res.status(500);
                 return res.send({err: err.toString()});
             }
-            console.log(JSON.stringify(data,null,2));
+
+            data['isbn'] = isbn;
+            console.log('Data from isbn: ' + isbn + ': ' + JSON.stringify(data,null,2));
+
+            var missing  = Utils.checkFields(data, 'book');
+            if (missing.length > 0)
+                return res.send({err: 'Couldnt get the information of the book :('});
 
             Book.create({
                 title: data['title'],
@@ -86,7 +93,7 @@ module.exports = {
                 isbn: req.params.all().isbn,
                 isbn10: data['isbn10'] !== undefined? data['isbn10'] : '',
                 isbn13: data['isbn13'] !== undefined? data['isbn13'] : '',
-                img: data['imageLinks'] !== undefined? data['imageLinks']['thumbnail'] : 'http://imageses.com/images/no_foto.jpg',
+                img: data['imageLinks'] !== undefined? data['imageLinks']['thumbnail'] : '/images/no-cover.png',
                 link: data['previewLink'] !== undefined? data['previewLink'] : '',
             }).exec(function(err,mbook) {
                 if (err) {
