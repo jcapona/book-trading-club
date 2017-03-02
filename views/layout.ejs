@@ -9,16 +9,16 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/styles/main_style.css">
 
 
   <link href='https://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900italic' rel='stylesheet' type='text/css'>
 
-  <title>BookTrader | Manage your library online</title>  
+  <title>BookTrader | Manage your library online</title>
 </head>
 
 <body>
@@ -32,7 +32,6 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,7 +39,6 @@
         <ul class="nav navbar-nav navbar-left">
           <a class="logo navbar-brand" href="/ ">book trader</a>
         </ul>
-        
         <ul class="nav navbar-nav navbar-right">
           <li><a href="all">All books!</a></li>
   <% if(req.user !== undefined) { %>
@@ -55,7 +53,7 @@
                 <a href="/dashboard"><i class="fa fa-gear"></i> Dashboard</a>
               </li>
               <li>
-                <a href="/msg"><i class="fa fa-envelope-o"></i> Messages 
+                <a href="/msg"><i class="fa fa-envelope-o"></i> Messages
                 <% if ((req.user.messages !== undefined)&&(req.user.messages > 0)) { %>
                   <span class="label label-primary"><%=req.user.messages%></span>
                 <% } %>
@@ -114,12 +112,11 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <% } %>
-    </div> 
+    </div>
     <% } %>
   </div>
 
     <%- body %>
-  
 
  <% if(req.user !== undefined) { %>
 <!-- Add book modal -->
@@ -200,7 +197,6 @@
         <h4 class="modal-title" id="myModalLabel">Access or create an account</h4>
       </div>
       <div class="modal-body">
-      
         <h4>Already have an account?</h4>
         <button type="button" class="btn btn-default btn-lg btn-block" id="login-btn">Login! <span class="caret"></span></button>
         <div class=" hidden" id="login-form">
@@ -259,7 +255,6 @@
         <h4 class="modal-title" id="interModalLabel">Message the owner</h4>
       </div>
       <div class="modal-body">
-      
        <form id="form-inter" role="form" action="/user" method="post">
             <span id="form-inter-span"></span>
             <div class="form-group">
@@ -272,14 +267,13 @@
 
       </div>
       <div class="modal-footer">
-      
       </div>
     </div>
   </div>
 </div>
 
   <script type="text/javascript">
-    var usr = {}; 
+    var usr = {};
     <% if (req.user) { %>
       usr.id = "<%= req.user.id %>";
       usr.username = "<%= req.user.username %>";
