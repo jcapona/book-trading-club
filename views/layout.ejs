@@ -202,7 +202,7 @@
         <h4>Already have an account?</h4>
         <button type="button" class="btn btn-default btn-lg btn-block" id="login-btn">Login! <span class="caret"></span></button>
         <div class=" hidden" id="login-form">
-          <form id="form-login" role="form" action="/login" method="post">
+          <form id="form-login" role="form">
             <div class="form-group">
               <label for="form-input-username">Username</label>
               <input type="username" name="username" class="form-control" id="form-input-username" placeholder="">
@@ -213,6 +213,7 @@
             </div>
             <button class="btn btn-default" type="submit">Log in</button>
           </form>
+          <span id="form-login-msg"><span>
         </div>
         <h4>New to the site?</h4>
         <button type="button" class="btn btn-default btn-lg btn-block" id="register-btn">Register <span class="caret"></span></button>
@@ -236,6 +237,7 @@
             </div>
             <button class="btn btn-default" type="submit">Register</button>
           </form>
+          <span id="form-register-msg"><span>
         </div>
 
       </div>
