@@ -26,13 +26,11 @@ module.exports = {
         return res.send({ message: info.message, user: user });
       }
       req.logIn(user, function(err) {
-        if (err) 
+        if (err)
           res.send(err);
-         
         req.session.flash = {
           success: info.message
-        } 
-        //return res.redirect('/');
+        }
         return res.send({ message: info.message, user: user });
       });
 
@@ -43,7 +41,7 @@ module.exports = {
     req.logout();
     req.session.flash = {
       success: "You've been logged out. Come back later!"
-    } 
+    }
     res.redirect('/');
   }
 };

@@ -55,13 +55,19 @@ module.exports = {
             return res.send({err: "Not logged in"});
         }
 
-	Book.create(req.params.all()).exec(function(err,book) {
-	    if (err)
-                return res.negotiate(err);
+	Book.create(req.params.all()).exec(function(err, book) {
+	    if (err) {
+                res.status(500);
+                return res.send({err: "Check the fields or try again later"});
+            }
 
             Prop.create({user_id: req.user.id, user: req.user.username, book_id: book.id}).exec(function(err,prop) {
                 if (err)
                     return res.negotiate(err);
+
+                req.session.flash = {
+                    success: "Book inserted succesfully :)"
+                }
                 return res.send({book: book, prop: prop});
             })
         });
