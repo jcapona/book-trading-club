@@ -41,8 +41,9 @@ function displayResults(data) {
   var html = "";
   html += "<div class='row'>";
   for (var i = 0; i < data.length; i++) {
+    var link = data[i]['link'] ? data[i]['link'] : "javaScript:void(0);";
     html += "<div class='col-xs-4 col-md-2'>";
-    html += "<a href="+"/book/info?id="+data[i.toString()]['id']+" class='text-center' target='_blank'>";
+    html += "<a href='"+link+"' class='text-center' target='_blank'>";
     html += "<img src="+data[i.toString()]['img']+" class='thumbnail center-block' style='max-height: 200px;'>";
     html += "</a>";
     html += "<h4 class='text-center'>"+data[i.toString()]['title'].slice(0,15);
