@@ -83,6 +83,8 @@ module.exports = {
                 return res.negotiate(err);
 
             var retMsg = [];
+	    if(inter.length == 0)
+                return res.view('msg', {msg: retMsg});
             inter.forEach(function(msg, index){
                 var obj = {};
                 obj.id = msg['id'];
